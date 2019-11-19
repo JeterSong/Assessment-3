@@ -61,25 +61,6 @@ namespace App6
                         {
                             Console.Out.WriteLine("Response Body: \r\n {0}", content);
                         }
-                        /*
-                        foreach (User user in users)
-                        {
-                            if (user.FirstNama == edun.Text)
-                            {
-                                if (user.Password == edpw.Text)
-                                {
-                                    Toast.MakeText(this, "Welcome", ToastLength.Long).Show();
-
-                                    Intent WelcomActivityIntent = new Intent(this, typeof(WelcomActivity));
-                                    WelcomActivityIntent.PutExtra("User", JsonConvert.SerializeObject(user));
-                                    StartActivity(WelcomActivityIntent);
-                                }
-                                else
-                                {
-                                    Toast.MakeText(this, "Invalid Login", ToastLength.Long).Show();
-                                }
-                            }
-                        }*/
                     }
                 }
             };

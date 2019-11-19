@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace App6
 {
@@ -49,21 +51,42 @@ namespace App6
         {
             var request = HttpWebRequest.Create(string.Format(@"https://10.0.2.2:5001/api/Users"));
             //http://172.31.99.148:5000/api/Users
-            request.ContentType = "application/jason";
+            request.ContentType = "application/json";
             request.Method = "POST";
+
+            User newUser = new User();
+            newUser.Country = editCountry.Text;
+            newUser.UserName = editUserName.Text;
+            newUser.Password = editPassword.Text;
+            newUser.FirstName = editFirstName.Text;
+            newUser.LastName = editLastName.Text;
+            newUser.Address = editAddress.Text;
+            newUser.Phone = editPhone.Text;
+
+            var userJason = JsonConvert.SerializeObject(newUser);
+            /*var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var _client = new HttpClient();
+            HttpResponseMessage response = null;
+            
+            response = await _client.PostAsync(string.Format(@"https://10.0.2.2:5001/api/Users"), content);
+            if (response.IsSuccessStatusCode)
+            {
+                Toast.MakeText(this, "User created successfully", ToastLength.Long);
+
+            }*/
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
-                string userJason = "{\"Id\":\"1\"," + "\"Country\":\"editCountry\"," + "\"UserName\":\"editUserName\"," + "\"Password\":\"editPassword\"," +
-                   "\"FirstName\":\"editFirstName\"," + "\"LastName\":\"editLastName\"," + "\"Address\":\"editAddress\"," +
-                   "\"Phone\":\"editPhone\"}";
-
+                /*string userJason = "{\"Country\":\"" + editCountry.Text + "\"," + "\"UserName\":\"" + editUserName.Text + "\"," + "\"Password\":\"" + editPassword.Text + "\"," +
+                   "\"FirstName\":\"" + editFirstName.Text + "\"," + "\"LastName\":\"" + editLastName.Text + "\"," + "\"Address\":\"" + editAddress.Text + "\"," +
+                   "\"Phone\":\"" + editPhone.Text + "\"}";
+                   */
                    streamWriter.Write(userJason);
             }
             using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
             {
 
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (response.StatusCode != HttpStatusCode.Created)
                 { 
                     Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
                     Toast.MakeText(this, "User created successfully", ToastLength.Long);
