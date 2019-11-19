@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Net;
+using System.IO;
 
 namespace App6
 {
@@ -36,6 +38,64 @@ namespace App6
                 StartActivity(loginActivityIntent);
             };
 
+            btnRegister.Click += btnRegister_Click;
+
+        }
+
+        private async void btnRegister_Click(object sender,EventArgs e )
+        {
+
+            /*Id = 1;
+                        FirstNama = FindViewById<EditText>(Resource.Id.FirstName).Text,
+                        LastName = FindViewById<EditText>(Resource.Id.LastName).Text,
+                        Phone = FindViewById<EditText>(Resource.Id.Phone).Text,
+                        Address = FindViewById<EditText>(Resource.Id.Address).Text,
+                        Country = FindViewById<EditText>(Resource.Id.Country).Text,
+                        Password = FindViewById<EditText>(Resource.Id.Password).Text*/
+
+
+            var request = HttpWebRequest.Create(string.Format(@"https://10.0.2.2:5001/api/Users"));
+            //http://172.31.99.148:5000/api/Users
+            request.ContentType = "application/jason";
+            request.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string userJason = "{\"Id\":\"1\"," + "\"Country\":\"NZ\"," + "\"Password\":\"123456\"," +
+                   "\"FirstName\":\"Jeter\","+"\"LastName\":\"Song\"," +"\"Address\":\"Cadman Ave\","+
+                   "\"Phone\":\"789456123\"}";
+
+                   streamWriter.Write(userJason);
+            }
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            {
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                { 
+                    Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
+                    Toast.MakeText(this, "User created successfully", ToastLength.Long);
+
+                    Intent LoginActivityIntent = new Intent(this, typeof(loginActivity));
+                    StartActivity(LoginActivityIntent);
+                }
+                else
+                {
+                    Toast.MakeText(this, "Failed to create user. Please retry!", ToastLength.Long);
+                }
+                /*
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                {
+                    var user = reader.ReadToEnd();
+                    if (string.IsNullOrWhiteSpace(user))
+                    {
+                        Console.Out.WriteLine("Response contained empty body...");
+                    }
+                    else
+                    {
+                        Console.Out.WriteLine("Response Body: \r\n {0}", user);
+                    }
+                }*/
+            }
         }
     }
 }
