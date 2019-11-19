@@ -9,6 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
+using System.Net;
+using System.IO;
 
 namespace App6
 {
@@ -24,6 +27,7 @@ namespace App6
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.login);
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 
             btnsignup = FindViewById<Button>(Resource.Id.btnsignup);
             btnlogin = FindViewById<Button>(Resource.Id.btnlogin);
@@ -36,29 +40,50 @@ namespace App6
                 StartActivity(RegisterActivityIntent);
             };
 
-            btnlogin.Click += (sender, e) =>
+            btnlogin.Click += async delegate
             {
-                Intent WelcomActivityIntent = new Intent(this, typeof(WelcomActivity));
-                WelcomActivityIntent.PutExtra("Username", edun.Text);
-                WelcomActivityIntent.PutExtra("Password", edpw.Text);
-                StartActivity(WelcomActivityIntent);
+                var request = HttpWebRequest.Create(string.Format(@"https://10.0.2.2:5001/api/Users"));
+                //http://172.31.99.148:5000/api/Users
+                request.ContentType = "application/jason";
+                request.Method = "GET";
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    if (response.StatusCode != HttpStatusCode.OK)
+                        Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        var content = reader.ReadToEnd();
+                        if (string.IsNullOrWhiteSpace(content))
+                        {
+                            Console.Out.WriteLine("Response contained empty body...");
+                        }
+                        else
+                        {
+                            Console.Out.WriteLine("Response Body: \r\n {0}", content);
+                        }
+                        /*
+                        foreach (User user in users)
+                        {
+                            if (user.FirstNama == edun.Text)
+                            {
+                                if (user.Password == edpw.Text)
+                                {
+                                    Toast.MakeText(this, "Welcome", ToastLength.Long).Show();
+
+                                    Intent WelcomActivityIntent = new Intent(this, typeof(WelcomActivity));
+                                    WelcomActivityIntent.PutExtra("User", JsonConvert.SerializeObject(user));
+                                    StartActivity(WelcomActivityIntent);
+                                }
+                                else
+                                {
+                                    Toast.MakeText(this, "Invalid Login", ToastLength.Long).Show();
+                                }
+                            }
+                        }*/
+                    }
+                }
             };
 
         }
-
-        //public void btnlogin_Click(View v)//Object sender,EventArgs e)
-        //{
-        //    Intent WelcomActivityIntent = new Intent(this, typeof(WelcomActivity));
-        //    WelcomActivityIntent.PutExtra("Username", edun.Text);
-        //    WelcomActivityIntent.PutExtra("Password", edpw.Text);
-        //    StartActivity(WelcomActivityIntent);
-        //}
-
-        //public void btnsignup_Click(View v)//Object sender,EventArgs e)
-        //{
-        //    Intent RegisterActivityIntent = new Intent(this, typeof(RegisterActivity));
-            
-        //    StartActivity(RegisterActivityIntent);
-        //}
     }
 }
