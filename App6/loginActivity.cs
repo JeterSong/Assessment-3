@@ -44,7 +44,7 @@ namespace App6
             {
                 var request = HttpWebRequest.Create(string.Format(@"https://10.0.2.2:5001/api/Users"));
                 //http://172.31.99.148:5000/api/Users
-                request.ContentType = "application/jason";
+                request.ContentType = "application/json";
                 request.Method = "GET";
                 using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                 {
@@ -59,7 +59,9 @@ namespace App6
                         }
                         else
                         {
+                            var userList = JsonConvert.DeserializeObject<List<User>>(content);
                             Console.Out.WriteLine("Response Body: \r\n {0}", content);
+
                         }
                     }
                 }
