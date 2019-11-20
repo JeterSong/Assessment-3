@@ -58,12 +58,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="House.cs" />
+    <Compile Include="HouseinfActivity.cs" />
     <Compile Include="loginActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserInfActivity.cs" />
     <Compile Include="WelcomActivity.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,11 +120,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Welcom.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\Signup.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -143,6 +140,19 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\user_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Houseinf.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\UserInf.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Welcom.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

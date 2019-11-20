@@ -68,8 +68,8 @@ namespace App6
                                 if(user.UserName==edun.Text & user.Password==edpw.Text)
                                 {
                                     Toast.MakeText(this, "Welcome", ToastLength.Long);
-                                    Intent WelcomActivityIntent = new Intent(this, typeof(WelcomActivity));
-                                    StartActivity(WelcomActivityIntent);
+                                    Intent MainActivityIntent = new Intent(this, typeof(MainActivity));
+                                    StartActivity(MainActivityIntent);
                                 }
                                 else
                                 {                               
