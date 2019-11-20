@@ -43,60 +43,60 @@ namespace App6
             googleMap.UiSettings.ZoomControlsEnabled = true;
             googleMap.UiSettings.CompassEnabled = true;
 
-            getCurrentLoc(googleMap);
+            getCurrentLocAsync(googleMap);
         }
 
-        public void getLastLocation(GoogleMap googleMap)
+        public async System.Threading.Tasks.Task getLastLocationAsync(GoogleMap googleMap)
         {
-        //    try
-        //    {
-        //        var location = await Geolocation.GetLastKnownLocationAsync();
-        //        if (location != null)
-        //        {
-        //            Console.WriteLine($"Last Loc - Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-        //            MarkerOptions curLoc = new MarkerOptions();
-        //            curLoc.SetPosition(new LatLng(location.Latitude, location.Longitude));
-        //            curLoc.SetTitle("You were here");
-        //            curLoc.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueAzure));
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                if (location != null)
+                {
+                    Console.WriteLine($"Last Loc - Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    MarkerOptions curLoc = new MarkerOptions();
+                    curLoc.SetPosition(new LatLng(location.Latitude, location.Longitude));
+                    curLoc.SetTitle("You were here");
+                    curLoc.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueAzure));
 
-            //            googleMap.AddMarker(curLoc);
-            //        }
-            //        else
-            //        {
-            //        Latitude: 37.4220
-            //        Longitude: -122.0840
+                    googleMap.AddMarker(curLoc);
+                }
+                else
+                {
+                    Latitude: 37.4220
+                    Longitude: -122.0840
 
-            //            MarkerOptions curLoc = new MarkerOptions();
-            //            curLoc.SetPosition(new LatLng(37.4220, -122.0840));
-            //            curLoc.SetTitle("You were here");
-            //            curLoc.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueAzure));
+                        MarkerOptions curLoc = new MarkerOptions();
+                    curLoc.SetPosition(new LatLng(37.4220, -122.0840));
+                    curLoc.SetTitle("You were here");
+                    curLoc.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueAzure));
 
-            //            googleMap.AddMarker(curLoc);
-            //        }
-            //    }
-        //    catch (FeatureNotSupportedException fnsEx)
-        //    {
-        //        // Handle not supported on device exception
-        //        Toast.MakeText(this, "Feature Not Supported", ToastLength.Short);
-        //    }
-        //    catch (FeatureNotEnabledException fneEx)
-        //    {
-        //        // Handle not enabled on device exception
-        //        Toast.MakeText(this, "Feature Not Enabled", ToastLength.Short);
-        //    }
-        //    catch (PermissionException pEx)
-        //    {
-        //        // Handle permission exception
-        //        Toast.MakeText(this, "Needs more permission", ToastLength.Short);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Unable to get location
-        //        Toast.MakeText(this, "Unable to get location", ToastLength.Short);
-        //    }
+                    googleMap.AddMarker(curLoc);
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+                Toast.MakeText(this, "Feature Not Supported", ToastLength.Short);
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+                Toast.MakeText(this, "Feature Not Enabled", ToastLength.Short);
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+                Toast.MakeText(this, "Needs more permission", ToastLength.Short);
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+                Toast.MakeText(this, "Unable to get location", ToastLength.Short);
+            }
         }
 
-        public void getCurrentLoc(GoogleMap googleMap)
+        public async System.Threading.Tasks.Task getCurrentLocAsync(GoogleMap googleMap)
         {
 
             Console.WriteLine("Test - MockLoc");
@@ -115,7 +115,7 @@ namespace App6
 
             markHouses(googleMap);
             Console.WriteLine("Test - CurrentLoc");
-            /*try
+            try
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
                 var location = await Geolocation.GetLocationAsync(request);
@@ -163,7 +163,7 @@ namespace App6
             catch (Exception ex)
             {
                 getLastLocation(googleMap);
-            }*/
+            }
         }
 
         public void markHouses(GoogleMap googleMap)

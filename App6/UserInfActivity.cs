@@ -17,6 +17,8 @@ namespace App6
     [Activity(Label = "UserInfActivity")]
     public class UserInfActivity : Activity
     {
+        public Bundle Arguments { get; private set; }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -36,20 +38,20 @@ namespace App6
         //    // return base.OnCreateView(inflater, container, savedInstanceState);
         //}
 
-        //private async void btnShare_Clicked(object sender, System.EventArgs e)
-        //{
-        //    var json = JsonConvert.SerializeObject(RegisterActivity.newUser);
-        //    await Share.RequestAsync(new ShareTextRequest
-        //    {
-        //        Text = json,
-        //        Title = "Share Info"
-        //    });
-        //}
-        //public static UserInfActivity NewInstance()
-        //{
-        //    var frag1 = new UserInfActivity { Arguments = new Bundle() };
-        //    return frag1;
-        //}
+        private async void btnShare_Clicked(object sender, System.EventArgs e)
+        {
+            var json = JsonConvert.SerializeObject(RegisterActivity.newUser);
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = json,
+                Title = "Share Info"
+            });
+        }
+        public static UserInfActivity NewInstance()
+        {
+            var frag1 = new UserInfActivity { Arguments = new Bundle() };
+            return frag1;
+        }
 
     }
 }

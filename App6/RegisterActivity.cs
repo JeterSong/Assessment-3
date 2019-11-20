@@ -19,6 +19,7 @@ namespace App6
     [Activity(Label = "RegisterActivity")]
     public class RegisterActivity : Activity
     {
+        internal static object newUser;
         Button btnRegister;Button btnBack; EditText editCountry;EditText editUserName; EditText editPassword;EditText editFirstName; EditText editLastName;EditText editAddress;EditText editPhone;
         protected override void OnCreate(Bundle savedInstanceState)
         {
