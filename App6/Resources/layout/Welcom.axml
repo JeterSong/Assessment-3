@@ -6,10 +6,25 @@
 
 	<TextView
 		android:text="Welcome"
+		android:gravity="center"
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:minWidth="25px"
 		android:minHeight="25px"
+		android:id="@+id/txtWelcome2" />
+	
+	<TextView
+		android:text="Welcome"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:gravity="center"
 		android:id="@+id/txtWelcome" />
+
+	
+		
+
 </LinearLayout>

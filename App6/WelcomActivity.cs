@@ -26,6 +26,7 @@ namespace App6
             UserName = FindViewById<TextView>(Resource.Id.txtWelcome);
 
             UserName.Text = Intent.GetStringExtra("Username");
+
         }
     }
 }

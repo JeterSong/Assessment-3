@@ -4,49 +4,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+		<TextView 
+		android:id="@+id/lblname"
+		android:text="Input your User Name"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+
 		<EditText
 			android:id="@+id/edun"
-			android:hint="Input your user name"
+			android:layout_below="@id/lblname"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:padding="5dp"/>
 
+		<TextView
+		android:id="@+id/lblPassword"
+		android:text="Input your Password"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+
+
 		<EditText
 			android:id="@+id/edpw"
-			android:hint="Input your Password"
-			android:layout_below="@id/edun"
+			android:layout_below="@id/lblPassword"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:gravity="bottom"
-			android:layout_margin="10dp"
-			android:padding="5dp"
 			android:password="true"
 			android:inputType="textPassword|textVisiblePassword"/>
-	<Button
-		android:id="@+id/btnsignup"
-		android:layout_below="@id/edpw"
-		android:layout_width="wrap_content"
-		android:layout_height="79.0dp"
-		android:text="Sign up"
-		android:layout_marginBottom="0.0dp"
-		android:layout_marginTop="43.5dp"
-		android:layout_centerHorizontal="true"
-		android:layout_alignParentRight="true"
-		android:layout_marginRight="0.0dp"
-		android:clickable="true" />
-	<Button
-		android:id="@+id/btnlogin"
-		android:layout_width="wrap_content"
-		android:layout_height="79.0dp"
-		android:layout_toLeftOf="@+id/btnsignup"
-		android:text="Login"
-		android:layout_marginBottom="0.0dp"
-		android:layout_marginTop="43.5dp"
-		android:layout_centerHorizontal="true"
-		android:layout_alignParentRight="true"
-		android:layout_marginRight="0.0dp"
-		android:clickable="true"
-		android:onClick="btnlogin_Click" />
+
+		<Button
+			android:id="@+id/btnsignup"
+			android:layout_below="@id/edpw"
+			android:layout_width="wrap_content"
+			android:layout_height="79.0dp"
+			android:text="Register"
+			android:layout_marginBottom="0.0dp"
+			android:layout_marginTop="43.5dp"
+			android:layout_centerHorizontal="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="0.0dp"
+			android:clickable="true" />
+		<Button
+			android:id="@+id/btnlogin"
+			android:layout_width="wrap_content"
+			android:layout_height="79.0dp"
+			android:layout_toLeftOf="@id/btnsignup"
+			android:text="Login"
+			android:layout_marginBottom="0.0dp"
+			android:layout_marginTop="43.5dp"
+			android:layout_centerHorizontal="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="0.0dp"
+			android:clickable="true"
+			android:onClick="btnlogin_Click" />
 	
 
 </LinearLayout>

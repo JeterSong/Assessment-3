@@ -136,5 +136,15 @@ namespace App6
                 getLastLocation(googleMap);
             }
         }
+
+        public void OnManpReady(GoogleMap Map)
+        {
+            MarkerOptions markerOp1 = new MarkerOptions();
+            markerOp1.SetPosition(new LatLng(50.379444, 2.773611));
+            markerOp1.SetTitle("Rental Property");
+
+            Map.AddMarker(markerOp1);
+        }
+
     }
 }
