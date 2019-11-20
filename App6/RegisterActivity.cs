@@ -64,23 +64,11 @@ namespace App6
             newUser.Phone = editPhone.Text;
 
             var userJason = JsonConvert.SerializeObject(newUser);
-            /*var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var _client = new HttpClient();
-            HttpResponseMessage response = null;
-            
-            response = await _client.PostAsync(string.Format(@"https://10.0.2.2:5001/api/Users"), content);
-            if (response.IsSuccessStatusCode)
-            {
-                Toast.MakeText(this, "User created successfully", ToastLength.Long);
 
-            }*/
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
-                /*string userJason = "{\"Country\":\"" + editCountry.Text + "\"," + "\"UserName\":\"" + editUserName.Text + "\"," + "\"Password\":\"" + editPassword.Text + "\"," +
-                   "\"FirstName\":\"" + editFirstName.Text + "\"," + "\"LastName\":\"" + editLastName.Text + "\"," + "\"Address\":\"" + editAddress.Text + "\"," +
-                   "\"Phone\":\"" + editPhone.Text + "\"}";
-                   */
+
                    streamWriter.Write(userJason);
             }
             using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
@@ -89,14 +77,14 @@ namespace App6
                 if (response.StatusCode != HttpStatusCode.Created)
                 { 
                     Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
+                    Toast.MakeText(this, "Failed to create user. Please retry!", ToastLength.Long);
+                }
+                else
+                {
                     Toast.MakeText(this, "User created successfully", ToastLength.Long);
 
                     Intent loginActivityIntent = new Intent(this, typeof(loginActivity));
                     StartActivity(loginActivityIntent);
-                }
-                else
-                {
-                    Toast.MakeText(this, "Failed to create user. Please retry!", ToastLength.Long);
                 }
             }
         }

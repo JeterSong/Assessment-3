@@ -49,7 +49,9 @@ namespace App6
                 using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                 {
                     if (response.StatusCode != HttpStatusCode.OK)
+
                         Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
+
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         var content = reader.ReadToEnd();
@@ -61,7 +63,19 @@ namespace App6
                         {
                             var userList = JsonConvert.DeserializeObject<List<User>>(content);
                             Console.Out.WriteLine("Response Body: \r\n {0}", content);
-
+                            foreach(User user in userList)
+                            {
+                                if(user.UserName==edun.Text & user.Password==edpw.Text)
+                                {
+                                    Toast.MakeText(this, "Welcome", ToastLength.Long);
+                                    Intent WelcomActivityIntent = new Intent(this, typeof(WelcomActivity));
+                                    StartActivity(WelcomActivityIntent);
+                                }
+                                else
+                                {                               
+                                    Toast.MakeText(this, "Failed to Login. Please retry!", ToastLength.Long);
+                                }
+                            }
                         }
                     }
                 }
